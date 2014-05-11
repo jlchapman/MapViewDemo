@@ -12,13 +12,12 @@
 
 #import <UIKit/UIKit.h>
 #import <ArcGIS/ArcGIS.h>
+#import "SearchViewController.h"
 
 //contants for data layers
 #define kTiledMapServiceURL @"http://maps2.utahcountyonline.org/arcgiswebadaptor/rest/services/UC_TopoBasemap/MapServer"
 #define kDynamicMapServiceURL @"http://maps2.utahcountyonline.org/arcgiswebadaptor/rest/services/Parcels/TaxParcels_mobile/MapServer"
 
-//Set up constant for predefined where clause for search
-#define kLayerDefinitionFormat @"STATE_NAME = '%@'"
 
 
 @interface MapViewDemoViewController : UIViewController <AGSMapViewLayerDelegate> {
@@ -30,12 +29,16 @@
 	AGSDynamicMapServiceLayer * _dynamicLayer;
 }
 
+@property (nonatomic, retain) UIPopoverController *searchPopover;
+@property (nonatomic, retain) SearchViewController *searchViewController;
+
 //map view is an outlet so we can associate it with UIView
 //in IB
 @property (nonatomic, strong) IBOutlet AGSMapView *mapView;
 @property (nonatomic, strong) AGSDynamicMapServiceLayer *dynamicLayer;
 
 - (IBAction)opacitySliderValueChanged:(id)sender;
+- (IBAction)Popup:(id)sender;
 
 @end
 

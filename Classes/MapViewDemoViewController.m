@@ -16,6 +16,8 @@
 
 @synthesize mapView = _mapView;
 @synthesize dynamicLayer = _dynamicLayer;
+@synthesize searchPopover;
+@synthesize searchViewController;
 
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -30,8 +32,6 @@
 	
 	//Add it to the map view
 	[self.mapView addMapLayer:tiledLayer withName:@"Tiled Layer"];
-
-	//release to avoid memory leaks
 	
 	//create an instance of a dynmaic map layer
 	self.dynamicLayer = [[AGSDynamicMapServiceLayer alloc] initWithURL:[NSURL URLWithString:kDynamicMapServiceURL]];
@@ -57,8 +57,14 @@
     // zoom to the United States
 	AGSEnvelope *env = [AGSEnvelope envelopeWithXmin:xmin ymin:ymin xmax:xmax ymax:ymax spatialReference:sr];
 	[self.mapView zoomToEnvelope:env animated:YES];
+    
+    searchViewController = [[SearchViewController alloc] initWithNibName:@"SearchViewController" bundle:nil ];
+    
+    // Setup the popover for use in the detail view.
+    searchPopover = [[UIPopoverController alloc] initWithContentViewController:searchViewController];
+    searchPopover.popoverContentSize = CGSizeMake(240., 560.);
+    searchPopover.delegate = (id)self;
 	
-		
 }
 
 
@@ -89,6 +95,16 @@
 - (IBAction)opacitySliderValueChanged:(id)sender {
 	// set the layer's opacity based on the value of the slider
 	self.dynamicLayer.opacity = ((UISlider *)sender).value;
+}
+
+- (IBAction)Popup:(id)sender
+{
+    UIButton *button = (UIButton*)sender;
+    
+	if (searchPopover.popoverVisible == NO) {
+        searchViewController.passString = @"This is a test";
+        [searchPopover presentPopoverFromRect:button.bounds inView:button permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+	}
 }
 
 
