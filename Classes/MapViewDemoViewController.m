@@ -44,6 +44,19 @@
 	
 	//set transparency
 	self.dynamicLayer.opacity = 0.2;
+    
+    AGSSpatialReference *sr = [AGSSpatialReference spatialReferenceWithWKID:102100];
+    sr = sr;    //stupid way to get rid of the warning
+	double xmin, ymin, xmax, ymax;
+    
+    xmin = -12499380.2686831;
+	ymin = 4821682.06706507;
+	xmax = -12337555.4867002;
+	ymax = 4957095.82330925;
+    
+    // zoom to the United States
+	AGSEnvelope *env = [AGSEnvelope envelopeWithXmin:xmin ymin:ymin xmax:xmax ymax:ymax spatialReference:sr];
+	[self.mapView zoomToEnvelope:env animated:YES];
 	
 		
 }

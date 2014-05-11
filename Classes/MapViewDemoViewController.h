@@ -14,8 +14,8 @@
 #import <ArcGIS/ArcGIS.h>
 
 //contants for data layers
-#define kTiledMapServiceURL @"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer"
-#define kDynamicMapServiceURL @"http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer"
+#define kTiledMapServiceURL @"http://maps2.utahcountyonline.org/arcgiswebadaptor/rest/services/UC_TopoBasemap/MapServer"
+#define kDynamicMapServiceURL @"http://maps2.utahcountyonline.org/arcgiswebadaptor/rest/services/Parcels/TaxParcels_mobile/MapServer"
 
 //Set up constant for predefined where clause for search
 #define kLayerDefinitionFormat @"STATE_NAME = '%@'"
